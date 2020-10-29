@@ -31,17 +31,17 @@
  * the compiler can produce more efficient code with it.
  */
 #ifdef WIN32
-    #ifdef LIBHDFS_DLL_EXPORT
+    #if defined(LIBHDFS_DLL_EXPORT)
         #define LIBHDFS_EXTERNAL __declspec(dllexport)
-    #elif LIBHDFS_DLL_IMPORT
+    #elif defined(LIBHDFS_DLL_IMPORT)
         #define LIBHDFS_EXTERNAL __declspec(dllimport)
     #else
         #define LIBHDFS_EXTERNAL
     #endif
 #else
-    #ifdef LIBHDFS_DLL_EXPORT
+    #if defined(LIBHDFS_DLL_EXPORT)
         #define LIBHDFS_EXTERNAL __attribute__((visibility("default")))
-    #elif LIBHDFS_DLL_IMPORT
+    #elif defined(LIBHDFS_DLL_IMPORT)
         #define LIBHDFS_EXTERNAL __attribute__((visibility("default")))
     #else
         #define LIBHDFS_EXTERNAL
@@ -1075,7 +1075,7 @@ extern  "C" {
      * @return           The root cause as a C-string.
      */
     LIBHDFS_EXTERNAL
-    char* hdfsGetLastExceptionRootCause();
+    char* hdfsGetLastExceptionRootCause(void);
 
     /**
      * Get the last exception stack trace that happened in the context of the
@@ -1091,7 +1091,7 @@ extern  "C" {
      * @return           The stack trace as a C-string.
      */
     LIBHDFS_EXTERNAL
-    char* hdfsGetLastExceptionStackTrace();
+    char* hdfsGetLastExceptionStackTrace(void);
 
 #ifdef __cplusplus
 }
